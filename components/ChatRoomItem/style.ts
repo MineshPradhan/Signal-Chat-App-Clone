@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
   
     container:{
       flexDirection: 'row', // Will be in same direction
-      padding:10, // Simply give padding to our container
+      padding:8, // Simply give padding to our container
     },
   
     image:{
-      height:60,
-      width:60,
-      borderRadius:30, // half of height and width to make perfect round of any image.
+      height:50,
+      width:50,
+      borderRadius:25, // half of height and width to make perfect round of any image.
       marginRight:10,  
     },
   
@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       alignItems:'center',
       position:'absolute',
-      left:55,
-      top:10,
+      left:45,
+      top:8,
     },
   
     badgeText:{
-      fontSize:12,
+      fontSize:10,
       color:'white',
     },
   
@@ -48,13 +48,13 @@ const styles = StyleSheet.create({
     },
   
     name:{
-      fontSize:18,
+      fontSize:15,
       fontWeight: 'bold',
-      marginBottom: 5,
+      // marginBottom: 1,
     },
   
     text:{
-      // fontSize:18,
+      fontSize:12,
       color:"gray",
     }
   })

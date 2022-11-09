@@ -1,21 +1,31 @@
-import React from 'react';
-import {Text, View, Image, StyleSheet} from 'react-native';
-import styles from './style';
+import React from "react";
+import { Text, View, Image, StyleSheet } from "react-native";
+import styles from "./style";
 
-export default function ChatRoomItem(){
-    return(
-        <View style={styles.container}>
-      <Image source={{uri:'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/4.jpg'}} style={styles.image}/>
-      <View style={styles.badgeContainer}>
-        <Text style={styles.badgeText}>5</Text>
-      </View>
+export default function ChatRoomItem({ chatRoom }) {
+  const user = chatRoom.users[1];
+  return (
+    <View style={styles.container}>
+      <Image
+        source={{
+          uri: user.imageUri
+        }}
+        style={styles.image}
+      />
+
+      {chatRoom.newMessages && <View style={styles.badgeContainer}>
+        <Text style={styles.badgeText}>{chatRoom.newMessages}</Text>
+      </View>}
+
       <View style={styles.rightContainer}>
         <View style={styles.row}>
-          <Text style={styles.name}>Laal Pila</Text>
-          <Text style={styles.text}>10:10</Text>
+          <Text style={styles.name}>{user.name}</Text>
+          <Text style={styles.text}>{chatRoom.lastMessage.createdAt}</Text>
         </View>
-        <Text numberOfLines={1} style={styles.text}>Bla Bla Bla Bla Bla Bla Bla messages..........</Text>
+        <Text numberOfLines={1} style={styles.text}>
+          {chatRoom.lastMessage.content}
+        </Text>
       </View>
     </View>
-    );
+  );
 }
