@@ -1,13 +1,38 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Pressable } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Pressable, KeyboardAvoidingView, Platform } from 'react-native'
 import { Octicons, Feather, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons';
 
 const MessageInput = () => {
 
     const [message, setMessage] = useState('');
 
+    const sendMessage = () => {
+      // Send Message
+      console.warn("sending: ", message);
+
+      setMessage('');
+    }
+
+    const onPlusClicked = () => {
+      console.warn("On Plus clicked");
+    }
+
+    const onPress = () => {
+      if (message) {
+        sendMessage();
+      } else {
+        onPlusClicked();
+      }
+    }
+
   return (
-    <View style={styles.root}>
+    <KeyboardAvoidingView 
+      style={styles.root}
+      // behavior={Platform.OS === "android" ? "padding" : "height"}
+      // keyboardVerticalOffset={100}
+      
+      // We can remove 'behaviour' and 'keyboardVerticalOffset' as it is working properly in Android Device but can also keep it since both are working fine. And KeyboardAvoidingView will be View cause View works fine.
+    >
       <View style={styles.inputContainer}>
       <Octicons name="smiley" size={24} color="#595959" style={styles.icon}/>
 
@@ -22,10 +47,10 @@ const MessageInput = () => {
         <MaterialCommunityIcons name="microphone-outline" size={24} color="#595959" style={styles.icon}/>
       </View>
 
-      <View style={styles.buttonContainer}>
+      <Pressable onPress={onPress} style={styles.buttonContainer}>
       {message ? <Ionicons name="send" size={20} color="white"/> : <AntDesign name="plus" size={24} color="white"/>}
-      </View>
-    </View>
+      </Pressable>
+    </KeyboardAvoidingView>
   )
 }
 

@@ -8,7 +8,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Pressable, Text, View, Image } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -20,6 +21,7 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 
 import ChatRoomScreen from '../screens/ChatRoomScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -40,14 +42,35 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={{ headerShown: true }} />
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{ headerTitle: HomeHeader}}/>
+      <Stack.Screen name="ChatRoom" component={ChatRoomScreen}/>
+      {/* <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={{ headerShown: true }} /> */}
+      {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} /> */}
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
+}
+
+const HomeHeader = (props) => {
+  return(
+    <View style={{flexDirection:'row', backgroundColor:'red', justifyContent:'center',
+    alignItems:'center', width:'100%'}}>
+      <Image 
+        source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png'}}
+        style={{ width:30 ,height:30, borderRadius:15}}
+        />
+      <Text style={{flex:1}}>Home</Text>
+      <Feather name="camera" size={24} color="black" />
+      <Feather name="edit-2" size={24} color="black" />
+    </View>
+    
+  )
 }
 
 /**
