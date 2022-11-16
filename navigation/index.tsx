@@ -8,8 +8,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable, Text, View, Image } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { ColorSchemeName, Pressable, Text, View, Image, useWindowDimensions } from 'react-native';
+import { Feather, SimpleLineIcons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -27,7 +27,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -46,7 +46,10 @@ function RootNavigator() {
         name="Home" 
         component={HomeScreen} 
         options={{ headerTitle: HomeHeader}}/>
-      <Stack.Screen name="ChatRoom" component={ChatRoomScreen}/>
+      <Stack.Screen 
+        name="ChatRoom" 
+        component={ChatRoomScreen}
+        options={{ headerTitle: ChatRoomHeader}}/>
       {/* <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={{ headerShown: true }} /> */}
       {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} /> */}
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
@@ -57,17 +60,54 @@ function RootNavigator() {
   );
 }
 
+// Home Header (Home Page)
 const HomeHeader = (props) => {
+
+  const {width} = useWindowDimensions();
+
   return(
-    <View style={{flexDirection:'row', backgroundColor:'red', justifyContent:'center',
-    alignItems:'center', width:'100%'}}>
+    <View style={{
+      flexDirection:'row',
+      justifyContent:'space-between',
+      alignItems:'center',
+      width,
+      padding:10,
+      marginLeft:-10
+    }}>
       <Image 
         source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png'}}
-        style={{ width:30 ,height:30, borderRadius:15}}
+        style={{ width:30 ,height:30, borderRadius:30}}
         />
-      <Text style={{flex:1}}>Home</Text>
-      <Feather name="camera" size={24} color="black" />
-      <Feather name="edit-2" size={24} color="black" />
+      <Text style={{flex:1, textAlign:'center', marginLeft:45,fontWeight:'bold'}}>Home</Text>
+      <Feather name="camera" size={24} color="black" style={{marginHorizontal:10}}/>
+      <Feather name="edit-2" size={24} color="black" style={{marginHorizontal:10}}/>
+    </View>
+    
+  )
+}
+
+// Chat Room Header (Chat Room Page)
+const ChatRoomHeader = (props) => {
+
+  const {width} = useWindowDimensions();
+
+  return(
+    <View style={{
+      flexDirection:'row',
+      justifyContent:'space-between',
+      alignItems:'center',
+      width,
+      padding:10,
+      marginLeft:-40
+    }}>
+      <Image 
+        source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png'}}
+        style={{ width:30 ,height:30, borderRadius:30}}
+        />
+      <Text style={{flex:1,marginLeft:10, fontWeight:'bold'}}>Home</Text>
+      <Feather name="camera" size={24} color="black" style={{marginHorizontal:10}}/>
+      <Feather name="edit-2" size={24} color="black" style={{marginHorizontal:10}}/>
+      <SimpleLineIcons name="options-vertical" size={24} color="black" style={{marginHorizontal:10, paddingRight:20}} />
     </View>
     
   )
