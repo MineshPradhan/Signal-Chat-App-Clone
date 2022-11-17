@@ -9,7 +9,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable, Text, View, Image, useWindowDimensions } from 'react-native';
-import { Feather, SimpleLineIcons } from '@expo/vector-icons';
+import { Feather, SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -49,7 +49,11 @@ function RootNavigator() {
       <Stack.Screen 
         name="ChatRoom" 
         component={ChatRoomScreen}
-        options={{ headerTitle: ChatRoomHeader}}/>
+        options={{ 
+          headerTitle: ChatRoomHeader,
+          headerBackTitleVisible:false, // Back button visibilaty disable
+          // title: 'Username',
+          }}/>
       {/* <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={{ headerShown: true }} /> */}
       {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} /> */}
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
@@ -96,18 +100,18 @@ const ChatRoomHeader = (props) => {
       flexDirection:'row',
       justifyContent:'space-between',
       alignItems:'center',
-      width,
+      width: width - 30,    
       padding:10,
-      marginLeft:-40
+      marginLeft:-35
     }}>
       <Image 
         source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png'}}
         style={{ width:30 ,height:30, borderRadius:30}}
         />
-      <Text style={{flex:1,marginLeft:10, fontWeight:'bold'}}>Home</Text>
-      <Feather name="camera" size={24} color="black" style={{marginHorizontal:10}}/>
-      <Feather name="edit-2" size={24} color="black" style={{marginHorizontal:10}}/>
-      <SimpleLineIcons name="options-vertical" size={24} color="black" style={{marginHorizontal:10, paddingRight:20}} />
+      <Text style={{flex:1, marginLeft:10, fontWeight:'bold'}}>{props.children}</Text>
+      <Feather name="video" size={24} color="black" style={{marginHorizontal:10}}/>
+      <Ionicons name="call-outline" size={24} color="black" style={{marginHorizontal:10}}/>
+      <SimpleLineIcons name="options-vertical" size={24} color="black" style={{marginHorizontal:10}} />
     </View>
     
   )
