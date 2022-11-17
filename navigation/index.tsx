@@ -82,7 +82,7 @@ const HomeHeader = (props) => {
         source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png'}}
         style={{ width:30 ,height:30, borderRadius:30}}
         />
-      <Text style={{flex:1, textAlign:'center', marginLeft:45,fontWeight:'bold'}}>Home</Text>
+      <Text style={{flex:1, textAlign:'center', marginLeft:40, fontSize:20 , fontWeight:'bold'}}>Signal</Text>
       <Feather name="camera" size={24} color="black" style={{marginHorizontal:10}}/>
       <Feather name="edit-2" size={24} color="black" style={{marginHorizontal:10}}/>
     </View>
